@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
@@ -6,20 +5,19 @@ const Wallet = () => {
   const [account, setAccount] = useState(null);
   const [network, setNetwork] = useState(null);
   const [provider, setProvider] = useState(null);
+  
+  const SUPPORTED_CHAINS = {
+    sepolia: 11155111,
+    anvil: 31337,
+  };
 
-//   useEffect(() => {
-//     if (window.ethereum) {
-//       const newProvider = new ethers.BrowserProvider(window.ethereum);
-//       setProvider(newProvider);
-//       checkConnection(); // Auto-connect on page load
-//     }
-//   }, []);
   useEffect(() => {
     if (window.ethereum) {
       const newProvider = new ethers.BrowserProvider(window.ethereum);
       setProvider(newProvider);
     }
   }, []);
+ 
   useEffect(() => {
     if (provider) {
       checkConnection();
@@ -31,13 +29,12 @@ const Wallet = () => {
       if (!window.ethereum) return;
       
       const accounts = await window.ethereum.request({ method: "eth_accounts" });
-
       if (accounts.length > 0) {
         const networkData = await provider.getNetwork();
         setNetwork(networkData.chainId);
 
-        if (networkData.chainId !== 31337) {
-          alert("Please switch to the Anvil local network (Chain ID: 31337).");
+        if (!Object.values(SUPPORTED_CHAINS).includes(networkData.chainId)) {
+          alert("Please switch to Sepolia or a supported local network.");
           return;
         }
 
@@ -63,15 +60,15 @@ const Wallet = () => {
       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
   
       if (accounts.length === 0) {
-        alert("No accounts found. Make sure your Anvil account is imported into MetaMask.");
+        alert("No accounts found. Make sure your account is imported into MetaMask.");
         return;
       }
   
       const networkData = await provider.getNetwork();
       setNetwork(networkData.chainId);
   
-      if (networkData.chainId !== 31337) {
-        alert("Please switch to the Anvil local network (Chain ID: 31337).");
+      if (!Object.values(SUPPORTED_CHAINS).includes(networkData.chainId)) {
+        alert("Please switch to Sepolia or a supported local network.");
         return;
       }
   
@@ -81,7 +78,6 @@ const Wallet = () => {
     }
   };
   
-
   return (
     <div>
       <button onClick={connectWallet}>

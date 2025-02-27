@@ -442,6 +442,25 @@ const fundMeABI = [
   },
   {
     "type": "function",
+    "name": "hasRaisedSpamRequest",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "isApprovalThresholdMet",
     "inputs": [
       {
@@ -458,6 +477,19 @@ const fundMeABI = [
       }
     ],
     "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "raiseSpamRequest",
+    "inputs": [
+      {
+        "name": "_proof",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -493,6 +525,43 @@ const fundMeABI = [
   },
   {
     "type": "function",
+    "name": "spamReports",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "reporter",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "proof",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "spamRequestCount",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "withdraw",
     "inputs": [
       {
@@ -505,8 +574,6 @@ const fundMeABI = [
     "stateMutability": "nonpayable"
   }
 ]
-
-
 
 
 // Export if using in a Node.js environment
