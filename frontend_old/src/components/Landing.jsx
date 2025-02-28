@@ -55,7 +55,7 @@ export default function LandingPage() {
                     />
                   </svg>
                 </div>
-                <span className="ml-2 text-xl font-bold text-indigo-800">Fund-Me DApp</span>
+                <span className="ml-2 text-xl font-bold text-indigo-800">Crowd-Bank</span>
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -138,7 +138,7 @@ export default function LandingPage() {
                 <span className="block text-indigo-600">Crowdfunding Platform</span>
               </h1>
               <p className="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
-                Fund-Me DApp is a revolutionary crowdfunding platform built on blockchain technology, enabling
+              Crowdfunding DApp is a revolutionary crowdfunding platform built on blockchain technology, enabling
                 transparent and secure fundraising without intermediaries.
               </p>
               <div className="mt-10 sm:flex">
@@ -236,7 +236,7 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Why Choose Fund-Me DApp?</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Why Choose Crowd Banking DApp?</h2>
             <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
               Our platform offers unique advantages that traditional crowdfunding can't match.
             </p>
@@ -430,7 +430,7 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">How Fund-Me DApp Works</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">How Crowd Bank DApp Works</h2>
             <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
               Our blockchain-powered platform makes crowdfunding simple, secure, and transparent.
             </p>
@@ -685,7 +685,7 @@ export default function LandingPage() {
                     />
                   </svg>
                 </div>
-                <span className="ml-2 text-xl font-bold">Fund-Me DApp</span>
+                <span className="ml-2 text-xl font-bold">Crowd Bank DApp</span>
               </div>
               <p className="mt-4 text-gray-400">
                 A decentralized crowdfunding platform built on blockchain technology, enabling transparent and secure
@@ -772,7 +772,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-12 border-t border-gray-700 pt-8">
-            <p className="text-base text-gray-400 text-center">&copy; 2025 Fund-Me DApp. All rights reserved.</p>
+            <p className="text-base text-gray-400 text-center">&copy; 2025 Crowd Bank DApp. All rights reserved.</p>
           </div>
         </div>
       </footer>

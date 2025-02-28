@@ -18,11 +18,14 @@ export default function FundMeApp() {
   const [requestId, setRequestId] = useState("")
   const [owner, setOwner] = useState("")
   const [requestIdToRemove, setRequestIdToRemove] = useState("")
+  const [withAmount, setwithAmount] = useState("0")
 
-  const [fundBalance, setFundBalance] = useState("0")
-  const [numFunders, setNumFunders] = useState("0")
+  const [fundBalance, setFundBalance] = useState(0)
+  const [numFunders, setNumFunders] = useState(0)
   const [approvals, setApprovals] = useState("0")
   const [approvalPercentage, setApprovalPercentage] = useState("0%")
+  const [withdrawRequests, setWithdrawRequests] = useState([]) // Stores requestId -> amount
+  const [nextRequestId, setNextRequestId] = useState(0)
 
   // Initialize Provider, Signer, and Contract
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function FundMeApp() {
       } catch (error) {
         console.error("Error initializing contract:", error)
       }
-    }
+    }  
 
     init()
   }, [])
@@ -193,16 +196,43 @@ export default function FundMeApp() {
   }
 
   // Ensure Contract is Available Before Calls
-  const fund = async () => {
-    if (!contract) {
-      console.error("Contract not initialized yet.")
-      return
-    }
+//   const fund = async () => {
+//     if (!contract) {
+//       console.error("Contract not initialized yet.")
+//       return
+//     }
 
-    const tx = await contract.fund({ value: ethers.parseEther(amount) })
-    await tx.wait()
-    alert("Funded successfully!")
-  }
+//     const tx = await contract.fund({ value: ethers.parseEther(amount) })
+//     await tx.wait()
+//     alert("Funded successfully!")
+//   }
+
+    const fund = async () => {
+        if (!contract) {
+        console.error("Contract not initialized yet.")
+        return
+        }
+
+        try {
+        const ethAmount = parseFloat(amount) // Convert input string to number
+        if (isNaN(ethAmount) || ethAmount <= 0) {
+            alert("Enter a valid amount")
+            return
+        }
+
+        const tx = await contract.fund({ value: ethers.parseEther(amount) })
+        await tx.wait()
+
+        setNumFunders((prev) => Number(prev) + 1)
+        setFundBalance((prev) => Number(prev) + ethAmount)
+
+        alert("Funded successfully!")
+        setAmount("") // Reset input field
+        } catch (error) {
+        console.error("Funding failed:", error)
+        alert("Transaction failed!")
+        }
+    }
 
   const createWithdrawalRequest = async () => {
     if (!contract) {
@@ -234,7 +264,9 @@ export default function FundMeApp() {
 
     const tx = await contract.withdraw(requestId)
     await tx.wait()
-    alert("Funds withdrawn!")
+    alert("Funds withdrawn!");
+    // setFundBalance((prev) => Number(prev) + withdrawalAmount);
+
   }
 
   return (
@@ -265,8 +297,8 @@ export default function FundMeApp() {
       <div className="flex-1 p-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">FundMe Dashboard</h1>
-            <p className="text-gray-500">Good Morning!</p>
+            <h1 className="text-2xl font-bold text-gray-800">Crowd Bank Dashboard</h1>
+            {/* <p className="text-gray-500">Good Morning!</p> */}
           </div>
           <div className="flex items-center space-x-4">
             <div className="relative">
@@ -369,13 +401,13 @@ export default function FundMeApp() {
         {/* Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-            <h3 className="text-lg font-semibold mb-4">Fund</h3>
+            <h3 className="text-lg font-semibold mb-4">Fund this campaign</h3>
             <div className="space-y-4">
               <input
                 type="text"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="Amount in ETH"
+                placeholder="Amount in Dollar"
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button

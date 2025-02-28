@@ -79,14 +79,38 @@ const Wallet = () => {
   };
   
   return (
+    // <div>
+    //   <button onClick={connectWallet}>
+    //     {account
+    //       ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}`
+    //       : "Connect Wallet"}
+    //   </button>
+    //   {network && <p>Connected to Chain ID: {network}</p>}
+    // </div>
     <div>
-      <button onClick={connectWallet}>
+      <button 
+        onClick={connectWallet} 
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 20px",
+          fontSize: "16px",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          transition: "0.3s",
+          fontWeight: "bold"
+        }}
+        onMouseOver={(e) => e.target.style.backgroundColor = "#45a049"}
+        onMouseOut={(e) => e.target.style.backgroundColor = "#4CAF50"}
+      >
         {account
           ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}`
           : "Connect Wallet"}
       </button>
       {network && <p>Connected to Chain ID: {network}</p>}
     </div>
+
   );
 };
 
